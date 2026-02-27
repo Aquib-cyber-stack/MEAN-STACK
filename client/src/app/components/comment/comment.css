@@ -1,0 +1,12 @@
+/* comment.css */
+.mat-mdc-card {
+    background-color: #16161a !important; /* Match the dark card */
+    border: 1px solid rgba(3, 218, 198, 0.2) !important; /* Cyan border */
+    color: white !important;
+}
+
+/* Fix the 'Write a comment' field */
+.mat-mdc-form-field {
+    --mdc-outlined-text-field-container-color: #0b0b0e !important;
+    --mdc-outlined-text-field-label-text-color: #03DAC6 !important;
+}

@@ -1,0 +1,71 @@
+/* styles.css */
+html, body { 
+    height: 100%; 
+    background-color: #0b0b0e; /* The Void Black */
+    color: #e0e0e0;            /* Light grey text for readability */
+}
+
+body { 
+    margin: 0; 
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
+}
+
+.create-post-btn {
+    background: linear-gradient(45deg, #03DAC6, #bb86fc) !important;
+    color: #000 !important;
+    font-weight: bold;
+    border-radius: 20px;
+    box-shadow: 0 0 15px rgba(3, 218, 198, 0.4);
+}
+/* login.css */
+.login-btn {
+    background: linear-gradient(45deg, #03DAC6, #bb86fc) !important;
+    color: #000 !important;
+    font-weight: bold;
+    letter-spacing: 1px;
+    box-shadow: 0 0 15px rgba(3, 218, 198, 0.4);
+    margin-top: 20px;
+}
+/* Add this to styles.css or the bottom of sign-up.css */
+@keyframes neonPulse {
+    0% {
+        border-color: #03DAC6;
+        box-shadow: 0 0 5px rgba(3, 218, 198, 0.2), inset 0 0 5px rgba(3, 218, 198, 0.1);
+    }
+    50% {
+        border-color: #bb86fc; /* Subtle shift to Neon Purple */
+        box-shadow: 0 0 20px rgba(187, 134, 252, 0.6), inset 0 0 10px rgba(187, 134, 252, 0.3);
+    }
+    100% {
+        border-color: #03DAC6;
+        box-shadow: 0 0 5px rgba(3, 218, 198, 0.2), inset 0 0 5px rgba(3, 218, 198, 0.1);
+    }
+}
+/* styles.css */
+@keyframes neonPulse {
+    0%, 100% {
+        border-color: rgba(3, 218, 198, 0.4);
+        box-shadow: 0 0 5px rgba(3, 218, 198, 0.2);
+    }
+    50% {
+        border-color: #03DAC6;
+        box-shadow: 0 0 15px rgba(3, 218, 198, 0.6);
+    }
+}
+
+.neon-border {
+    border: 1px solid #03DAC6;
+    animation: neonPulse 3s infinite ease-in-out;
+}
+/* Force override Bootstrap and Angular Material defaults */
+body, .bg-light, .container-fluid {
+    background-color: #0b0b0e !important;
+    color: #e0e0e0 !important;
+}
+
+/* Fix the 'Choppy' cards caused by Bootstrap classes */
+.card, .mat-mdc-card {
+    background-color: #16161a !important;
+    border: 1px solid rgba(3, 218, 198, 0.2) !important;
+    color: white !important;
+}

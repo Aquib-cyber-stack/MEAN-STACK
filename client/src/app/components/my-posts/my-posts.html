@@ -1,0 +1,10 @@
+<div *ngIf="posts.length > 0">
+  <div class=" d-flex justify-content-center align-items-center"
+    *ngFor ="let post of posts">
+    <app-post-card [post]="post" [myPost]="true"></app-post-card>
+  </div>
+</div>
+
+<div *ngIf="posts.length === 0">
+  <h1 class="text-center text-muted">No posts found</h1>
+</div>

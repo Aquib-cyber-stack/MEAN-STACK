@@ -1,0 +1,12 @@
+<div class="d-flex align-items-start mb-4 ">
+	<img [src] = "comment.author?.imgUrl" width="40" height="40" class="rounded-circle me-2" />
+	<div class = "flex-column">
+		<div class="mb-1 p-2 bg-light rounded-3">
+			<strong> {{ comment.author?.username }} </strong>
+			<p class="mb-1 text-break">
+				{{ comment.content }}
+			</p>
+		</div>
+		<small class="text-muted mx-2"> {{ comment.createdAt | date:'MMM d, y, h:mm a' }}</small>
+	</div>
+</div>

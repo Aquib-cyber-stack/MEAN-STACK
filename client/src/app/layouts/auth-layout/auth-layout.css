@@ -1,0 +1,10 @@
+/* auth-layout.css */
+.bg-auth {
+    height: 100vh;
+    /* Gaming Gradient: Deep Midnight Purple to The Void */
+    background: linear-gradient(135deg, #1a0b2e 0%, #0b0b0e 100%);
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

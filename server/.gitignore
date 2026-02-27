@@ -1,0 +1,55 @@
+# Node modules
+node_modules/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Coverage and test output
+coverage/
+.nyc_output/
+*.lcov
+
+# Cache
+.cache/
+dist/
+build/
+.tmp/
+temp/
+*.tsbuildinfo
+
+# IDE and Editor settings
+.vscode/
+.idea/
+
+# ESLint/Stylelint cache
+.eslintcache
+.stylelintcache
+
+# Runtime data
+*.pid
+*.seed
+*.pid.lock
+
+# Output of `npm pack`
+*.tgz
+
+# REPL history
+.node_repl_history
+
+# Optional npm/yarn/pnpm caches
+.pnpm-debug.log*
+.yarn-integrity
+.npm/

@@ -1,0 +1,23 @@
+.navbar {
+    background-color: #0b0b0e !important; /* Match the main background */
+    border-bottom: 2px solid #03DAC6;    /* Neon Cyan underline */
+    padding: 10px 20px;
+}
+
+.navbar-brand {
+    font-family: 'Anta', sans-serif;
+    color: #03DAC6 !important;
+    text-shadow: 0 0 10px rgba(3, 218, 198, 0.7); /* Cyan Glow */
+    font-size: 1.8rem;
+}
+
+/* Make the nav links (All Posts, My Posts) white */
+.nav-link {
+    color: #ffffff !important;
+    opacity: 0.8;
+}
+
+.nav-link:hover {
+    color: #03DAC6 !important;
+    opacity: 1;
+}

@@ -1,0 +1,26 @@
+/* all-posts.css or post-card.css */
+mat-card {
+    background: rgba(22, 22, 26, 0.95) !important; /* Deep Charcoal */
+    border: 1px solid rgba(255, 255, 255, 0.05);  /* Faint border to define edges */
+    border-radius: 12px !important;
+    color: #e0e0e0 !important;
+    margin-bottom: 24px;
+    overflow: hidden; /* Keeps the image corners rounded */
+}
+
+/* Make the image span the full width of the card without gaps */
+.post-image {
+    width: 100%;
+    display: block;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+mat-card-header {
+    padding: 16px;
+}
+
+mat-card-title {
+    color: #03DAC6 !important; /* Neon Cyan for titles */
+    font-family: 'Anta', sans-serif;
+    font-size: 1.2rem;
+}
