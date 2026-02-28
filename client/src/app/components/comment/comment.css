@@ -1,12 +1,14 @@
-/* comment.css */
-.mat-mdc-card {
-    background-color: #16161a !important; /* Match the dark card */
-    border: 1px solid rgba(3, 218, 198, 0.2) !important; /* Cyan border */
-    color: white !important;
+/* This targets the actual text inside the comment bubbles */
+.mat-mdc-card-content, .comment-text, p {
+    color: #e0e0e0 !important; /* Light gray text */
 }
 
-/* Fix the 'Write a comment' field */
-.mat-mdc-form-field {
-    --mdc-outlined-text-field-container-color: #0b0b0e !important;
-    --mdc-outlined-text-field-label-text-color: #03DAC6 !important;
+/* If you are using a custom div for the bubble, use this: */
+.comment-bubble {
+    background-color: #16161a !important; 
+    color: #ffffff !important;
+    border: 1px solid rgba(3, 218, 198, 0.3) !important;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 8px;
 }
