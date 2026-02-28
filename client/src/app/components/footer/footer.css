@@ -1,10 +1,17 @@
 .footer {
-    background-color: #08080a !important;
-    color: #666 !important;
-    border-top: 1px solid #1a1a1a;
+    background-color: #0b0b0e !important; /* Matches your body's pure dark color */
+    color: #a0a0a0 !important; /* Brighter than #666 for better readability */
+    border-top: 1px solid rgba(3, 218, 198, 0.1) !important; /* Very subtle cyan line instead of gray */
     padding: 40px 0;
+    background-image: none !important; /* Kills any lingering patterns */
 }
 
 .footer h3, .footer-link {
-    color: #03DAC6 !important; /* Cyan branding in footer */
+    color: #03DAC6 !important; /* Cyan branding */
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.footer-link:hover {
+    color: #bb86fc !important; /* Neon purple hover effect */
 }
