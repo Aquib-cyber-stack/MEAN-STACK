@@ -1,19 +1,11 @@
-/* Targeted override for comment bubbles */
-.mat-mdc-card, 
-.mat-mdc-card-content,
-div[mat-card-content],
-.comment-container div {
-    background-color: #16161a !important; /* Force Dark */
-    color: #e0e0e0 !important;           /* Force Light Text */
+.comment-bubble {
+    background-color: #16161a !important; /* Dark background */
+    border: 1px solid rgba(3, 218, 198, 0.3) !important; /* Neon Cyan border */
+    color: #ffffff !important; /* White text */
 }
 
-/* Ensure the user name and text inside are visible */
-.mat-mdc-card-title, 
-.mat-mdc-card-subtitle, 
-p, span {
-    color: #03DAC6 !important; /* Cyan for names */
-}
-
-.mat-mdc-card-content p {
-    color: #ffffff !important; /* White for actual comment text */
+.comment-bubble strong {
+    color: #bb86fc !important; /* Neon Purple for usernames */
+    display: block;
+    margin-bottom: 4px;
 }
