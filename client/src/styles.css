@@ -1,14 +1,15 @@
 /* styles.css */
 html, body { 
-    background-color: #2a2a2a; /* Dark gray */
-    color: #ffffff;            /* White text */
-    border-radius: 10px;
-    padding: 10px;
+    height: 100%;
+    margin: 0;
+    background-color: #0b0b0e !important; /* Pure Dark */
+    color: #e0e0e0; 
+    font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-body { 
-    margin: 0; 
-    font-family: Roboto, "Helvetica Neue", sans-serif; 
+/* Force all containers to stay dark */
+.container, .container-fluid, .main-content {
+    background-color: transparent !important;
 }
 
 .create-post-btn {
