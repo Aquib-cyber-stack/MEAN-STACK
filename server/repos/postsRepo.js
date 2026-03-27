@@ -1,8 +1,8 @@
 const Post = require("../models/Post.js");
 
-const getAllPosts =  async (userId) => {
+const getAllPosts = async (userId) => {
     try {
-        const posts =  await Post.find({}).populate('author', 'username imgUrl').sort({ createdAt: -1 });
+        const posts = await Post.find({}).populate('author', 'username imgUrl').sort({ createdAt: -1 });
         const postsWithLikesStatus = posts.map(post => {
             const isLiked = post.likedBy.includes(userId);
             return { ...post._doc, isLiked };
@@ -13,7 +13,7 @@ const getAllPosts =  async (userId) => {
     }
 }
 
-const getPostById = async ( userId, postId) => {
+const getPostById = async (userId, postId) => {
     try {
         const post = await Post.findById(postId).populate('author', 'username imgUrl');
         if (!post) {
@@ -30,7 +30,7 @@ const getPostById = async ( userId, postId) => {
 
 const getPostsByUser = async (userId) => {
     try {
-        const posts = await Post.find({ author : userId }).populate('author', 'username imgUrl').sort({ createdAt: -1 });
+        const posts = await Post.find({ author: userId }).populate('author', 'username imgUrl').sort({ createdAt: -1 });
         const postsWithLikesStatus = posts.map(post => {
             const isLiked = post.likedBy.includes(userId);
             return { ...post._doc, isLiked };
@@ -51,6 +51,23 @@ const createPost = async (postData) => {
     }
 }
 
+// --- NEW UPDATE FUNCTION ---
+const updatePost = async (postId, updateData) => {
+    try {
+        const updatedPost = await Post.findByIdAndUpdate(
+            postId, 
+            updateData, 
+            { new: true, runValidators: true }
+        );
+        if (!updatedPost) {
+            throw new Error('Post not found');
+        }
+        return updatedPost;
+    } catch (error) {
+        throw new Error(error.message);
+    }
+}
+
 const deletePost = async (postId) => {
     try {
         const post = await Post.findByIdAndDelete(postId);
@@ -63,7 +80,7 @@ const deletePost = async (postId) => {
     }
 }
 
-const likePost = async (postId , userId) => {
+const likePost = async (postId, userId) => {
     try {
         const post = await Post.findById(postId);
         if (!post) {
@@ -81,7 +98,7 @@ const likePost = async (postId , userId) => {
     }
 }
 
-const unlikePost = async (postId , userId) => {
+const unlikePost = async (postId, userId) => {
     try {
         const post = await Post.findById(postId);
         if (!post) {
@@ -107,6 +124,7 @@ module.exports = {
     getPostById,
     getPostsByUser,
     createPost,
+    updatePost, // Exporting new function
     deletePost,
     likePost,
     unlikePost
