@@ -5,6 +5,7 @@ const validate = require('../middlewares/validate');
 const auth = require('../middlewares/auth');
 const router = express.Router();
 
+router.put('/:postId', auth, postController.updatePost);
 router.post('/create', createPostValidator , auth , validate , postController.createPost);
 router.get('/all', auth ,  postController.getAllPosts);
 router.get('/userPosts' , auth , postController.getPostsByUser);
