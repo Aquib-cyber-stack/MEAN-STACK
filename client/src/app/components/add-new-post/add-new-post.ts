@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core'; // Added OnInit
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PostServices } from '../../services/post/post-services';
 import { ToastrService } from 'ngx-toastr';
-import { Router, ActivatedRoute } from '@angular/router'; // Added ActivatedRoute
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-add-new-post',
@@ -20,7 +20,7 @@ export class AddNewPost implements OnInit {
     private postServices: PostServices,
     private toastr: ToastrService,
     private router: Router,
-    private route: ActivatedRoute // Injected route to get the ID
+    private route: ActivatedRoute 
   ) {
     this.postForm = this.formBuilder.group({
       title: ['', Validators.required],
@@ -30,7 +30,6 @@ export class AddNewPost implements OnInit {
   }
 
   ngOnInit() {
-    // Check if an ID exists in the URL
     this.postId = this.route.snapshot.paramMap.get('id');
     
     if (this.postId) {
@@ -42,11 +41,11 @@ export class AddNewPost implements OnInit {
   loadPostData(id: string) {
     this.postServices.getPostById(id).subscribe({
       next: (post) => {
-        // Pre-fill the form with existing data
+        // Fix: Removed .imgUrl to match your interface IPost
         this.postForm.patchValue({
           title: post.title,
           content: post.content,
-          imageUrl: post.imgUrl || post.imageUrl
+          imageUrl: post.imageUrl 
         });
       },
       error: (err) => {
@@ -63,11 +62,10 @@ export class AddNewPost implements OnInit {
     }
 
     if (this.isEditMode && this.postId) {
-      // Logic for Update
       this.postServices.updatePost(this.postId, this.postForm.value).subscribe({
         next: () => {
           this.toastr.success('Post updated successfully');
-          this.router.navigate(['']);
+          this.router.navigate(['/myposts']);
         },
         error: (err) => {
           console.error('Update failed', err);
@@ -75,7 +73,6 @@ export class AddNewPost implements OnInit {
         }
       });
     } else {
-      // Logic for Create
       this.postServices.createPost(this.postForm.value).subscribe({
         next: (res) => {
           this.toastr.success('Post created successfully');
