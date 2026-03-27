@@ -16,9 +16,11 @@ const routes: Routes = [
     component: MainLayout,
     canActivate: [AuthGuard],
     children: [
-      { path: "newpost" , component: AddNewPost },
       { path: "" , component: AllPosts },
       { path: "allposts" , component: AllPosts },
+      { path: "newpost" , component: AddNewPost },
+      // --- NEW EDIT ROUTE ---
+      { path: "editpost/:id", component: AddNewPost }, 
       { path: "myposts" , component: MyPosts },
     ]
   },
