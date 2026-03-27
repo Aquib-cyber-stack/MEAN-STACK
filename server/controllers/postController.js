@@ -1,45 +1,44 @@
 const postService = require('../services/postServices');
 const jsend = require('jsend');
 
-/**
- * Create a New Post
- * Handles mapping from the frontend request to the database DTO
- */
 const createPost = async (req, res) => {
     try {
-        // 1. Safeguard: Check if req.user exists from the auth middleware
-        if (!req.user) {
-            return res.status(401).json(jsend.error({ 
-                message: 'Unauthorized: User context missing' 
-            }));
-        }
+        // 1. Log the incoming data for debugging in Render
+        console.log("Creating post with User:", req.user?.id || req.user?._id);
 
-        // 2. Map the DTO (Data Transfer Object)
-        // We check for both .id and ._id to prevent "undefined" author errors
         const postDTO = {
             title: req.body.title,
             content: req.body.content,
-            // Maps 'imageUrl' from frontend to 'image' if your model uses that name
-            image: req.body.imageUrl || req.body.image || "", 
+            // Check which name your model uses: 'image' or 'imgUrl'
+            // Based on your repo's populate, it might be imgUrl
+            imgUrl: req.body.imageUrl || req.body.imgUrl || "", 
             author: req.user.id || req.user._id 
         };
 
-        // 3. Basic Validation before hitting the Service/Repo
-        if (!postDTO.title || !postDTO.content) {
+        // 2. Prevent the 400 error by checking data before saving
+        if (!postDTO.title || !postDTO.content || !postDTO.author) {
             return res.status(400).json(jsend.error({ 
-                message: 'Title and Content are required fields' 
+                message: "Validation failed: Title, Content, and Author are required." 
             }));
         }
 
         const post = await postService.createPost(postDTO);
-        
-        // 4. Success Response
         res.status(201).json(jsend.success(post));
 
     } catch (error) {
-        // Detailed logging for Render console to help you debug 400 errors
-        console.error("[PostController Error]:", error.message);
+        // This log is your best friend. Check 'Logs' in Render Dashboard!
+        console.error("DATABASE ERROR:", error.message);
         res.status(400).json(jsend.error({ message: error.message }));
+    }
+};
+
+// ... keep your other functions (getAllPosts, etc.) as they were
+const getAllPosts = async (req, res) => {
+    try {
+        const posts = await postService.getAllPosts(req.user.id || req.user._id);
+        res.status(200).json(jsend.success(posts));
+    } catch (error) {
+        res.status(500).json(jsend.error({ message: error.message }));
     }
 };
 
@@ -47,15 +46,6 @@ const getPostById = async (req, res) => {
     try {
         const post = await postService.getPostById(req.user.id || req.user._id, req.params.postId);
         res.status(200).json(jsend.success(post));
-    } catch (error) {
-        res.status(500).json(jsend.error({ message: error.message }));
-    }
-};
-
-const getAllPosts = async (req, res) => {
-    try {
-        const posts = await postService.getAllPosts(req.user.id || req.user._id);
-        res.status(200).json(jsend.success(posts));
     } catch (error) {
         res.status(500).json(jsend.error({ message: error.message }));
     }
