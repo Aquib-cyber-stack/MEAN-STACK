@@ -3,19 +3,15 @@ const jsend = require('jsend');
 
 const createPost = async (req, res) => {
     try {
-        // 1. Log the incoming data for debugging in Render
         console.log("Creating post with User:", req.user?.id || req.user?._id);
 
         const postDTO = {
             title: req.body.title,
             content: req.body.content,
-            // Check which name your model uses: 'image' or 'imgUrl'
-            // Based on your repo's populate, it might be imgUrl
             imgUrl: req.body.imageUrl || req.body.imgUrl || "", 
             author: req.user.id || req.user._id 
         };
 
-        // 2. Prevent the 400 error by checking data before saving
         if (!postDTO.title || !postDTO.content || !postDTO.author) {
             return res.status(400).json(jsend.error({ 
                 message: "Validation failed: Title, Content, and Author are required." 
@@ -26,13 +22,44 @@ const createPost = async (req, res) => {
         res.status(201).json(jsend.success(post));
 
     } catch (error) {
-        // This log is your best friend. Check 'Logs' in Render Dashboard!
         console.error("DATABASE ERROR:", error.message);
         res.status(400).json(jsend.error({ message: error.message }));
     }
 };
 
-// ... keep your other functions (getAllPosts, etc.) as they were
+// --- NEW UPDATE FUNCTION ---
+const updatePost = async (req, res) => {
+    try {
+        const { postId } = req.params;
+        const userId = req.user.id || req.user._id;
+
+        // 1. Ownership check: Fetch post to verify author
+        const post = await postService.getPostById(userId, postId);
+        
+        // Ensure the logged-in user is the author
+        // Comparing strings because MongoDB IDs are objects
+        if (post.author._id.toString() !== userId.toString()) {
+            return res.status(403).json(jsend.error({ 
+                message: "Unauthorized: You can only edit your own posts." 
+            }));
+        }
+
+        // 2. Map updated fields
+        const updateData = {
+            title: req.body.title,
+            content: req.body.content,
+            imgUrl: req.body.imageUrl || req.body.imgUrl || post.imgUrl
+        };
+
+        const updatedPost = await postService.updatePost(postId, updateData);
+        res.status(200).json(jsend.success(updatedPost));
+
+    } catch (error) {
+        console.error("UPDATE ERROR:", error.message);
+        res.status(400).json(jsend.error({ message: error.message }));
+    }
+};
+
 const getAllPosts = async (req, res) => {
     try {
         const posts = await postService.getAllPosts(req.user.id || req.user._id);
@@ -89,6 +116,7 @@ const unlikePost = async (req, res) => {
 
 module.exports = {
     createPost,
+    updatePost, // Exported
     getPostById,
     getAllPosts,
     getPostsByUser,
