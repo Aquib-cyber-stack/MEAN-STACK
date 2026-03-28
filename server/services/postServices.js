@@ -22,7 +22,7 @@ const getAllPosts = async (userId) => {
 
 const getPostById = async (userId, postId) => {
 	try {
-		const post = await postRepo.getPostById(userId , postId);
+		const post = await postRepo.getPostById(userId, postId);
 		return post;
 	} 
 	catch (error) {
@@ -50,9 +50,20 @@ const deletePost = async (postId) => {
 	}
 }
 
-const likePost = async (postId , userId) => {
+// ✅ ADDED
+const updatePost = async (postId, postData) => {
 	try {
-		const likedPost = await postRepo.likePost(postId , userId);
+		const updatedPost = await postRepo.updatePost(postId, postData);
+		return updatedPost;
+	} 
+	catch (error) {
+		throw new Error(error.message);
+	}
+}
+
+const likePost = async (postId, userId) => {
+	try {
+		const likedPost = await postRepo.likePost(postId, userId);
 		return likedPost;
 	} 
 	catch (error) {
@@ -60,9 +71,9 @@ const likePost = async (postId , userId) => {
 	}
 }
 
-const unlikePost = async (postId , userId) => {
+const unlikePost = async (postId, userId) => {
 	try {
-		const unlikedPost = await postRepo.unlikePost(postId , userId);
+		const unlikedPost = await postRepo.unlikePost(postId, userId);
 		return unlikedPost;
 	} 
 	catch (error) {
@@ -76,6 +87,7 @@ module.exports = {
 	getAllPosts,
 	getPostsByUser,
 	deletePost,
+	updatePost, // ✅ ADDED
 	likePost,
 	unlikePost
 }
