@@ -5,13 +5,13 @@ const validate = require('../middlewares/validate');
 const auth = require('../middlewares/auth');
 const router = express.Router();
 
+router.post('/create', auth, createPostValidator, validate, postController.createPost); // ✅ fixed order
 router.put('/:postId', auth, postController.updatePost);
-router.post('/create', createPostValidator , auth , validate , postController.createPost);
-router.get('/all', auth ,  postController.getAllPosts);
-router.get('/userPosts' , auth , postController.getPostsByUser);
-router.get('/:postId', auth , postController.getPostById);
-router.delete('/:postId', auth , postController.deletePost);
-router.post('/:postId/like', auth , postController.likePost);
-router.post('/:postId/unlike', auth , postController.unlikePost);
+router.get('/all', auth, postController.getAllPosts);
+router.get('/userPosts', auth, postController.getPostsByUser);
+router.get('/:postId', auth, postController.getPostById);
+router.delete('/:postId', auth, postController.deletePost);
+router.post('/:postId/like', auth, postController.likePost);
+router.post('/:postId/unlike', auth, postController.unlikePost);
 
 module.exports = router;
