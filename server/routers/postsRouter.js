@@ -5,8 +5,8 @@ const validate = require('../middlewares/validate');
 const auth = require('../middlewares/auth');
 const router = express.Router();
 
-router.post('/create', auth, createPostValidator, validate, postController.createPost); // ✅ fixed order
-router.put('/:postId', auth, postController.updatePost);
+// ✅ FIX: auth runs FIRST, then validate, then controller
+router.post('/create', auth, createPostValidator, validate, postController.createPost);
 router.get('/all', auth, postController.getAllPosts);
 router.get('/userPosts', auth, postController.getPostsByUser);
 router.get('/:postId', auth, postController.getPostById);
